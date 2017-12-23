@@ -1,30 +1,40 @@
 "use strict";
-var algorithm = 'aes256';
 let crypto;
 
-module.exports.encrypt = function (dataEncrypt, secretKey, callback) {
+module.exports.encrypt = function (dataEncrypt, algorithm, secretKey, callback) {
     try {
         crypto = require('crypto');
     } catch (err) {
         return callback('crypto support is disabled!');
     }
-    var cipher = crypto.createCipher(algorithm, secretKey);
+
+    if (!!algorithm) {
+        if (['aes256', 'aes192', 'aes128'].indexOf(String(algorithm)) == -1)
+            return callback('Please choose valid algorithm');
+    } else
+        algorithm = 'aes256';
+    var cipher = crypto.createCipher(algorithm, String(secretKey));
     try {
         var crypted = cipher.update(String(dataEncrypt), 'utf8', 'hex')
         crypted += cipher.final('hex');
     } catch (ex) {
-        return callback("Error Happened While Decrypt");
+        return callback("Error Happened While Encrypt");
     }
-    return callback(null, crypto.getCiphers());
+    return callback(null, crypted);
 }
 
-module.exports.deCrypt = function (dataEncrypt, secretKey, callback) {
+module.exports.deCrypt = function (dataEncrypt, algorithm, secretKey, callback) {
     try {
         crypto = require('crypto');
     } catch (err) {
         return callback('crypto support is disabled!');
     }
-    var decipher = crypto.createDecipher(algorithm, secretKey)
+    if (!!algorithm) {
+        if (['aes256', 'aes192', 'aes128'].indexOf(String(algorithm)) == -1)
+            return callback('Please choose valid algorithm');
+    } else
+        algorithm = 'aes256';
+    var decipher = crypto.createDecipher(algorithm, String(secretKey))
     try {
         var dec = decipher.update(String(dataEncrypt), 'hex', 'utf8')
         dec += decipher.final('utf8');
