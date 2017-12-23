@@ -1,6 +1,6 @@
 {
   "name": "movocrypt",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "keep your data secure",
   "main": "index.js",
     "keywords": ["movocrypt" , "nodejs" , "password", "auth" , "crypto" , "secure" , "security" , "rsa" , "sha" , "symmetric" , "asymmetric" ,
