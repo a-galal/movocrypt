@@ -1,9 +1,13 @@
 {
   "name": "movocrypt",
-  "version": "1.1.3",
+  "version": "1.2.2",
   "description": "keep your data secure",
   "main": "index.js",
     "keywords": ["movocrypt" , "nodejs" , "password", "auth" , "crypto" , "secure" , "security" , "rsa" , "sha" , "symmetric" , "asymmetric" ,
         "aes" , "encryption" , "hash" , "authentication" , "js" , "secure" , "pin" , "code" , "crypt"],
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/a-galal/movocrypt.git"
+  },
   "author": "movocode"  
 }
