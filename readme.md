@@ -3,6 +3,8 @@
 Sample & Eazy, Strait forward way to secure important data.
 Library to help you secure passwords , pincode and important data.
 
+[![Build Status](http://movoclinic.com/images/passing.svg)]
+
 <img alt="movocrypt logo" src="http://movoclinic.com/images/npm-logo.png" title="movocrypt"/>
 
 
@@ -30,6 +32,8 @@ This method use for encrypt your important data.
 
 [dataForEncrypt] data that you need to encrypt data.
 
+[algorithm] algorithms choose one : 'aes128' or 'aes192' or 'aes256' 
+
 [secretKey] key for encryption.
 
 [result] encrypted data.
@@ -37,8 +41,10 @@ This method use for encrypt your important data.
 ```js
 var movocrypt = require('movocrypt');
 //dataForEncrypt plain data (number , float , string , json) that you need to encrypt data.
+//algorithm choose one 'aes128' or 'aes192' or 'aes256'
+// or leave it null to use default algorithm 'aes256'
 //secretKey key for encryption.
-movocrypt.encrypt(dataForEncrypt , secretKey, function (err, result) {
+movocrypt.encrypt(dataForEncrypt ,algorithm , secretKey, function (err, result) {
 //if err get this message "Error Happened While Encrypt"
 //result example : dfjghdkgsdkfghiawgfaku
     console.log(err || result);
@@ -51,6 +57,8 @@ This method use for decrypt your important data.
 
 [dataForDecrypt] data that you need to decrypt data.
 
+[algorithm] algorithms choose one : 'aes128' or 'aes192' or 'aes256' 
+
 [secretKey] key for encryption.
 
 [result] plain data.
@@ -58,8 +66,10 @@ This method use for decrypt your important data.
 ```js
 var movocrypt = require('movocrypt');
 //dataForDecrypt this is data that you need to decrypt data.
+//algorithm choose one 'aes128' or 'aes192' or 'aes256'
+// or leave it null to use default algorithm 'aes256'
 //secretKey key for encryption.
-movocrypt.decrypt(dataForDecrypt , secretKey, function (err, result) {
+movocrypt.decrypt(dataForDecrypt ,algorithm, secretKey, function (err, result) {
 //if err get this message "Error Happened While Decrypt"
 //result example : plain data
     console.log(err || result);
