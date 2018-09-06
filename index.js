@@ -13,12 +13,15 @@ module.exports.encrypt = function (dataEncrypt, algorithm, secretKey, callback) 
             return callback('Please choose valid algorithm');
     } else
         algorithm = 'aes256';
-    
-    if(!String(secretKey))
+
+    if (!String(secretKey))
         return callback('Please enter valid secretKey');
+
+    if (!String(dataEncrypt))
+        return callback('Please enter valid data');
     var cipher = crypto.createCipher(algorithm, String(secretKey));
     try {
-        var crypted = cipher.update(String(dataEncrypt), 'utf8', 'hex')
+        var crypted = cipher.update(JSON.stringify(dataEncrypt), 'utf8', 'hex')
         crypted += cipher.final('hex');
     } catch (ex) {
         return callback("Error Happened While Encrypt");
@@ -27,7 +30,7 @@ module.exports.encrypt = function (dataEncrypt, algorithm, secretKey, callback) 
 }
 
 module.exports.deCrypt = function (dataEncrypt, algorithm, secretKey, callback) {
-    
+
     try {
         crypto = require('crypto');
     } catch (err) {
@@ -38,13 +41,13 @@ module.exports.deCrypt = function (dataEncrypt, algorithm, secretKey, callback) 
             return callback('Please choose valid algorithm');
     } else
         algorithm = 'aes256';
-    
-    if(!String(secretKey))
+
+    if (!String(secretKey))
         return callback('Please enter valid secretKey');
-    
+
     var decipher = crypto.createDecipher(algorithm, String(secretKey))
     try {
-        var dec = decipher.update(String(dataEncrypt), 'hex', 'utf8')
+        var dec = decipher.update(dataEncrypt, 'hex', 'utf8')
         dec += decipher.final('utf8');
     } catch (ex) {
         return callback("Error Happened While Decrypt");
